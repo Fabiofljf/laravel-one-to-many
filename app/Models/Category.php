@@ -4,9 +4,9 @@ namespace App\Models;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 
-class Post extends Model
+class Category extends Model
 {
-    protected $fillable = ['title', 'thumb', 'slug', 'description'];
+    protected $fillable = ['Programming', 'Automation', 'Web design', 'Best Practices'];
 
     public static function generateSlug($title)
     {
