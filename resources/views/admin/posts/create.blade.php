@@ -4,32 +4,7 @@
 <section id="create_dashboard">
     <h1 class="p-4 mb-0 border shadow text-center">Dashboard-Create</h1>
     <div class="row">
-        <div class="col-2 bg_grey">
-            <h5 class="p-4 my-3 text-light">Esplora tutte le funzionalità</h5>
-            <ul class="nav flex-column p-4">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{{ route('admin.home') }}">
-                        <span data-feather="home" class="align-text-bottom"></span>
-                        Dashboard
-                    </a>
-                </li>
-                <!-- /Dashboard -->
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('admin.posts.index') }}">
-                        <span data-feather="file" class="align-text-bottom"></span>
-                        Posts
-                    </a>
-                </li>
-                <!-- /Posts -->
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('admin.posts.create') }}">
-                        <span data-feather="shopping-cart" class="align-text-bottom"></span>
-                        Add Post
-                    </a>
-                </li>
-                <!-- /Add Post -->
-            </ul>
-        </div>
+        @include('partials.navbar')
         <!-- /.col sx -->
         <div class="col bg_lightslategray">
             <form action="{{route('admin.posts.store')}}" method="post">
@@ -67,6 +42,16 @@
                     @enderror
                 </div>
                 <!-- /description -->
+                <div class="mb-3">
+                    <label for="category_id" class="form-label">Categories</label>
+                    <select class="form-control @error('category_id') is-invalid @enderror" name="category_id" id="category_id">
+                        <option value="">Select a category</option>
+                        @foreach($categories as $category)
+                        <option value="{{$category->id}}">{{$category->name}}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <!-- /categories -->
                 <div class="mb-3 row">
                     <div class="offset-sm-4 col-sm-8">
                         <button type="submit" class="btn btn-primary">Invia!</button>

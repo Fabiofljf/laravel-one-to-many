@@ -1,9 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Models\Category;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Str;
+use App\Http\Requests\CategoryRequest;
+use Illuminate\Validation\Rule;
 
 class CategoryController extends Controller
 {
@@ -14,62 +17,45 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        $categories = Category::orderByDesc('id')->get();
+        return view('admin.categories.index', compact('categories'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\CategoryRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CategoryRequest $request)
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Category  $category
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Category $category)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Category  $category
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Category $category)
-    {
-        //
+        // Validazione
+        $val_data = $request->validated();
+        // generate slug
+        $slug = Str::slug($request->name);
+        $val_data['slug'] = $slug;
+        // Salvataggio
+        Category::create($val_data);
+        // redirect from post to get
+        return redirect()->back()->with('message', "Category $slug added successfully");
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Category  $category
+     * @param  \App\Http\Requests\CategoryRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category)
+    public function update(CategoryRequest $request, Category $category)
     {
-        //
+        $val_data = $val_data = $request->validated();
+        // generate slug
+        $slug = Str::slug($request->name);
+        $val_data['slug'] = $slug;
+
+        $category->update($val_data);
+        // redirect from post to get
+        return redirect()->back()->with('message', "Category $slug updated successfully");
     }
 
     /**
@@ -80,6 +66,7 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        $category->delete();
+        return redirect()->back()->with('message', "Category $category->name removed successfully");
     }
 }
