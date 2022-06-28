@@ -23,7 +23,7 @@
                 <div class="mb-3 row">
                     <label for="thumb" class="col-xs-4 col-form-label">Thumb</label>
                     <div class="col-xs-8">
-                        <input type="text" class="form-control @error('thumb') is_invalid @enderror" name="thumb" id="inputName" placeholder="https://..." value="{{old('thumb')}}">
+                        <input type="text" class="form-control @error('thumb') is_invalid @enderror" name="thumb" id="inputName" placeholder="https://..." value="{{old('thumb', $post->thumb)}}">
                     </div>
                     <small id="helpId" class="text-muted">type thumb here</small>
                     @error('thumb')
@@ -34,7 +34,7 @@
                 <div class="mb-3 row">
                     <label for="description" class="col-xs-4 col-form-label">Description</label>
                     <div class="col-xs-8">
-                        <input type="text" class="form-control @error('description') is_invalid @enderror" name="description" id="inputName" placeholder="lorem..." value="{{old('description')}}">
+                        <input type="text" class="form-control @error('description') is_invalid @enderror" name="description" id="inputName" placeholder="lorem..." value="{{old('description', $post->description)}}">
                     </div>
                     <small id="helpId" class="text-muted">type description here</small>
                     @error('description')
@@ -47,7 +47,7 @@
                     <select class="form-control @error('category_id') is-invalid @enderror" name="category_id" id="category_id">
                         <option value="">Select a category</option>
                         @foreach($categories as $category)
-                        <option value="{{$category->id}}">{{$category->name}}</option>
+                        <option value="{{$category->id}}" {{old('category_id') == $category->id ? 'selected' : ''}}>{{$category->name}}</option>
                         @endforeach
                     </select>
                 </div>

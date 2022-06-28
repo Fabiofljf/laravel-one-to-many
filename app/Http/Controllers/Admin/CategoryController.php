@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Str;
 use App\Http\Requests\CategoryRequest;
 use Illuminate\Validation\Rule;
+use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
@@ -43,20 +44,25 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\CategoryRequest  $request
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(CategoryRequest $request, Category $category)
+    public function update(Request $request, Category $category)
     {
-        $val_data = $val_data = $request->validated();
+        //dd($request->all());
+
+        $val_data = $request->validate([
+            'name' => ['required', Rule::unique('categories')->ignore($category)]
+        ]);
         // generate slug
         $slug = Str::slug($request->name);
         $val_data['slug'] = $slug;
 
         $category->update($val_data);
-        // redirect from post to get
         return redirect()->back()->with('message', "Category $slug updated successfully");
     }
+
 
     /**
      * Remove the specified resource from storage.

@@ -3,8 +3,9 @@
 @section('content')
 <section id="dashboard">
     <h1 class="p-4 mb-0 border shadow text-center">Dashboard-Posts</h1>
+    @include('partials.session_message')
     <div class="row">
-    @include('partials.navbar')
+        @include('partials.navbar')
         <!-- /.col sx -->
         <div class="col bg_lightslategray">
             <section id="intro">
@@ -12,9 +13,7 @@
                     <div class="row flex-column">
                         <div class="col d-flex justify-content-around m-5">
                             <h2>Esplora tutta la lista!</h2>
-                            <button type="button" class="btn btn-primary" data-bs-toggle="button" aria-pressed="false" autocomplete="off">
-                                <a class="text-light text-uppercase" href="{{ route('admin.posts.create') }}">Aggiungi</a>
-                            </button>
+                            <a class="btn btn-primary text-light text-uppercase" href="{{ route('admin.posts.create') }}">Aggiungi</a>
                         </div>
                         <!-- /.col introduzione-->
                         <div class="col">
@@ -22,6 +21,7 @@
                                 <tr class="border text-center">
                                     <th>Id</th>
                                     <th>Title</th>
+                                    <th>Category</th>
                                     <th>Thumb</th>
                                     <th>Description</th>
                                 </tr>
@@ -30,6 +30,7 @@
                                 <tr>
                                     <td class="border p-2">{{$post->id}}</td>
                                     <td class="border p-2">{{$post->title}}</td>
+                                    <td class="border p-2">{{$post->category_id}}</td>
                                     <td class="border p-2"><img width=300 src="{{$post->thumb}}" alt="{{$post->title}}"></td>
                                     <td class="border p-2">{{$post->description}}</td>
                                     <td class="border p-3 my-1">
@@ -47,7 +48,6 @@
                                             </svg>
                                         </a>
                                         <!-- /edit -->
-
                                         <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-post-{{$post->slug}}">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
                                                 <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />

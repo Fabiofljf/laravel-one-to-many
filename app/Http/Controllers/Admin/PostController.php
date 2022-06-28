@@ -72,7 +72,9 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        return view('admin.posts.edit', compact('post'));
+        $categories = Category::all();
+
+        return view('admin.posts.edit', compact('post', 'categories'));
     }
 
     /**
@@ -87,13 +89,14 @@ class PostController extends Controller
 
         // validate data
         $val_data = $request->validated();
-        //dd($val_data);
+        // dd($val_data);
         // Gererate the slug
         $slug = Post::generateSlug($request->title);
         //dd($slug);
         $val_data['slug'] = $slug;
         // update the resource
         $post->update($val_data);
+        // dd($post);
 
         // redirect to get route
         return redirect()->route('admin.posts.index')->with('message', "$post->title updated successfully");

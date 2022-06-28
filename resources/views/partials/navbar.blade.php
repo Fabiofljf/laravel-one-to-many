@@ -16,18 +16,25 @@
                 </li>
                 <!-- /Posts -->
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('admin.posts.create') }}">
-                        <span data-feather="shopping-cart" class="align-text-bottom"></span>
-                        Add New Post +
-                    </a>
-                </li>
-                <!-- /Add Post -->
-                <li class="nav-item">
                     <a class="nav-link" href="{{ route('admin.categories.index') }}">
                         <span data-feather="shopping-cart" class="align-text-bottom"></span>
                         Categories
                     </a>
                 </li>
                 <!-- /Categories -->
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        <span data-feather="shopping-cart" class="align-text-bottom"></span>
+                        Tags
+                    </a>
+                </li>
+                <!-- /Tags -->
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        <span data-feather="shopping-cart" class="align-text-bottom"></span>
+                        Users
+                    </a>
+                </li>
+                <!-- /User -->
             </ul>
         </div>

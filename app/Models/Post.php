@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Post extends Model
 {
-    protected $fillable = ['title', 'thumb', 'slug', 'description'];
+    protected $fillable = ['title', 'thumb', 'slug', 'description', 'category_id'];
 
     public static function generateSlug($title)
     {

@@ -12,6 +12,19 @@
                     <div class="row flex-column">
                         <div class="col d-flex justify-content-around m-5">
                             <h2>Esplora lista categorie</h2>
+
+                            <form class="d-flex align-items-center" action="{{route('admin.categories.store')}}" method="post">
+                                @csrf
+                                <div class="mr-3">
+                                    <label for="name" class="form-label mb-0">Name</label>
+                                    <input type="text" class="form-control" name="title" id="title" aria-describedby="helpIdName" placeholder="Insert Name">
+                                    <small id="helpIdName" class="form-text text-muted">Insert Name</small>
+                                </div>
+                                <div>
+                                    <button type="submit" class="btn btn-primary">Add</button>
+                                </div>
+                            </form>
+
                         </div>
                         <!-- /.col introduzione-->
                         <div class="col">
@@ -46,7 +59,7 @@
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-danger text-white">Cancella</button>
                                             </form>
-
+                                            @include('partials.session_message')
                                         </td>
                                     </tr>
                                     @empty
